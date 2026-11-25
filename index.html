@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Almacén Las Acacias · Productos naturales</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Nunito+Sans:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <!-- ================= ENCABEZADO ================= -->
+    <header class="encabezado">
+      <a class="logo" href="#">
+        <span class="logo-icono">🌿</span>
+        <span>Almacén <strong>Las Acacias</strong></span>
+      </a>
+
+      <label class="buscador">
+        <span class="visualmente-oculto">Buscar productos</span>
+        <input id="buscador" type="search" placeholder="Buscar miel, yerba, café…" />
+      </label>
+
+      <button class="btn-carrito" id="btn-carrito" type="button" aria-label="Abrir carrito">
+        🛒 Carrito
+        <span class="contador" id="contador-carrito">0</span>
+      </button>
+    </header>
+
+    <main>
+      <!-- ================= PORTADA ================= -->
+      <section class="portada">
+        <div>
+          <p class="portada-etiqueta">Productos de la región, directo del productor</p>
+          <h1>Lo rico de siempre, <em>sin vueltas</em></h1>
+          <p class="portada-texto">
+            Miel, yerba, frutos secos y todo lo que necesitás para tu despensa. Hacé tu pedido online
+            y lo retirás en el local o te lo llevamos a tu casa.
+          </p>
+        </div>
+        <aside class="cotizacion">
+          <p class="cotizacion-titulo">Dólar oficial hoy</p>
+          <p class="cotizacion-valor" id="cotizacion-dolar">$ —</p>
+          <p class="cotizacion-nota" id="cotizacion-estado">Precio de venta · se actualiza solo</p>
+        </aside>
+      </section>
+
+      <!-- ================= CATÁLOGO ================= -->
+      <section class="catalogo" id="catalogo">
+        <div class="catalogo-encabezado">
+          <h2>Nuestros productos</h2>
+          <div class="filtros" id="filtros">
+            <button class="chip activo" type="button" data-categoria="todos">Todos</button>
+            <button class="chip" type="button" data-categoria="dulces">Dulces</button>
+            <button class="chip" type="button" data-categoria="infusiones">Infusiones</button>
+            <button class="chip" type="button" data-categoria="frutos-secos">Frutos secos</button>
+            <button class="chip" type="button" data-categoria="almacen">Almacén</button>
+          </div>
+        </div>
+
+        <div class="productos" id="productos"></div>
+
+        <!-- Mensaje para cuando la búsqueda no encuentra nada (arranca oculto) -->
+        <p class="sin-resultados oculto" id="sin-resultados">
+          No encontramos productos con esa búsqueda. Probá con otra palabra.
+        </p>
+      </section>
+
+      <!-- ================= FINALIZAR COMPRA ================= -->
+      <section class="checkout" id="checkout">
+        <div class="checkout-texto">
+          <h2>Finalizá tu pedido</h2>
+          <p>
+            Completá tus datos y te contactamos para coordinar la entrega. El pago se hace al
+            recibir el pedido.
+          </p>
+          <p class="checkout-total">Total del pedido: <strong id="total-checkout">$ 0</strong></p>
+        </div>
+
+        <form class="formulario" id="form-compra" novalidate>
+          <div class="campo">
+            <label for="nombre">Nombre y apellido</label>
+            <input id="nombre" type="text" placeholder="Ana Gómez" />
+            <p class="error-campo" id="error-nombre"></p>
+          </div>
+
+          <div class="campo">
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="ana@mail.com" />
+            <p class="error-campo" id="error-email"></p>
+          </div>
+
+          <div class="campo">
+            <label for="telefono">Teléfono</label>
+            <input id="telefono" type="tel" placeholder="3492 555555" />
+            <p class="error-campo" id="error-telefono"></p>
+          </div>
+
+          <div class="campo">
+            <label for="entrega">Entrega</label>
+            <select id="entrega">
+              <option value="">Elegí una opción</option>
+              <option value="retiro">Retiro en el local</option>
+              <option value="envio">Envío a domicilio</option>
+            </select>
+            <p class="error-campo" id="error-entrega"></p>
+          </div>
+
+          <div class="campo campo-ancho">
+            <label for="direccion">Dirección <span class="opcional">(solo para envío)</span></label>
+            <input id="direccion" type="text" placeholder="Bv. Santa Fe 1234" />
+            <p class="error-campo" id="error-direccion"></p>
+          </div>
+
+          <div class="campo campo-ancho">
+            <label class="check">
+              <input id="terminos" type="checkbox" />
+              Acepto que me contacten por WhatsApp para coordinar el pedido
+            </label>
+            <p class="error-campo" id="error-terminos"></p>
+          </div>
+
+          <button class="btn-principal campo-ancho" type="submit">Confirmar pedido</button>
+        </form>
+
+        <!-- Mensaje de compra exitosa (arranca oculto) -->
+        <div class="mensaje-exito oculto" id="compra-exitosa">
+          <p class="mensaje-exito-titulo">¡Gracias por tu pedido! 🎉</p>
+          <p id="compra-exitosa-detalle">Te vamos a escribir para coordinar la entrega.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="pie">
+      <p><strong>Almacén Las Acacias</strong> · Bv. Lehmann 950 · Lunes a sábados de 9 a 20 h</p>
+      <p class="pie-nota">Tienda ficticia · Proyecto final del Curso de JavaScript · CapacitarTec</p>
+    </footer>
+
+    <!-- ================= CARRITO (panel lateral) =================
+         Arranca cerrado. Para abrirlo, agregá la clase "abierto" al <aside id="carrito">
+         y la clase "visible" al <div id="velo">. Probalo primero desde DevTools. -->
+    <div class="velo" id="velo"></div>
+
+    <aside class="carrito" id="carrito" aria-label="Carrito de compras">
+      <div class="carrito-encabezado">
+        <h2>Tu carrito</h2>
+        <button class="btn-cerrar" id="btn-cerrar-carrito" type="button" aria-label="Cerrar carrito">✕</button>
+      </div>
+
+      <p class="carrito-vacio" id="carrito-vacio">Todavía no agregaste productos.</p>
+
+      <ul class="carrito-lista" id="lista-carrito">
+        <!--
+          Así se tiene que ver cada producto del carrito (crealo con JavaScript):
+
+          <li class="carrito-item" data-id="1">
+            <span class="carrito-item-emoji">🍯</span>
+            <div class="carrito-item-info">
+              <p class="carrito-item-nombre">Miel de campo</p>
+              <p class="carrito-item-precio">$ 6.500 c/u</p>
+            </div>
+            <div class="cantidad">
+              <button type="button" data-accion="restar">−</button>
+              <span>1</span>
+              <button type="button" data-accion="sumar">+</button>
+            </div>
+            <button class="btn-quitar" type="button" data-accion="quitar" aria-label="Quitar">🗑</button>
+          </li>
+        -->
+      </ul>
+
+      <div class="carrito-pie">
+        <p class="carrito-total">Total <strong id="total-carrito">$ 0</strong></p>
+        <button class="btn-secundario" id="btn-vaciar" type="button">Vaciar carrito</button>
+        <a class="btn-principal" id="btn-finalizar" href="#checkout">Finalizar compra</a>
+      </div>
+    </aside>
+  </body>
+</html>
